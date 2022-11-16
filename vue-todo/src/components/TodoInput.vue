@@ -21,11 +21,7 @@ export default {
       // Storage save
       // initialization
       if (this.newTodoItem !== '') {
-        var obj = {
-          completed: false,
-          item: this.newTodoItem
-        }
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
       }
     },
