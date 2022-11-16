@@ -5,14 +5,27 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus addBtn"></i>
     </span>
+
+    <modal-view v-if="showModal">
+      <h3 slot="header">
+        경고!
+        <i class="fa-solid fa-xmark closeModalBtn" @click="showModal = false"></i>
+      </h3>
+      <div slot="body">
+        할일을 입력해 주세요
+      </div>
+    </modal-view>
   </div>
 </template>
 
 <script>
+import ModalView from './common/Modal'
+
 export default {
   data: function() {
     return {
-      newTodoItem: ""
+      newTodoItem: "",
+      showModal: false
     }
   },
   methods: {
@@ -23,12 +36,17 @@ export default {
       if (this.newTodoItem !== '') {
         this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput: function() {
       this.newTodoItem = '';
     }
   },
+  components: {
+    "modal-view": ModalView
+  }
 }
 </script>
 
@@ -60,5 +78,10 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+
+.closeModalBtn {
+  color: #42b983;
+
 }
 </style>
