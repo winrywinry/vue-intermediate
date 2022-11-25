@@ -45,7 +45,7 @@ export default {
     }
   },
   components: {
-    "modal-view": ModalView
+    ModalView
   }
 }
 </script>
