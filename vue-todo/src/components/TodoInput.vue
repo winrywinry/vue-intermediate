@@ -22,14 +22,14 @@
 import ModalView from './common/Modal'
 
 export default {
-  data: function() {
+  data() {
     return {
       newTodoItem: "",
       showModal: false
     }
   },
   methods: {
-    addTodo: function() {
+    addTodo() {
       // console.log(this.newTodoItem);
       // Storage save
       // initialization
@@ -40,7 +40,7 @@ export default {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodoItem = '';
     }
   },
