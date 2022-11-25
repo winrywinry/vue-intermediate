@@ -12,28 +12,28 @@
 </template>
 
 <script>
-import TodoFooterVue from './components/TodoFooter.vue'
-import TodoHeaderVue from './components/TodoHeader.vue'
-import TodoInputVue from './components/TodoInput.vue'
-import TodoListVue from './components/TodoList.vue'
+import TodoHeader from './components/TodoHeader.vue'
+import TodoInput from './components/TodoInput.vue'
+import TodoList from './components/TodoList.vue'
+import TodoFooter from './components/TodoFooter.vue'
 
 export default {
   components: {
-    'todo-header': TodoHeaderVue,
-    'todo-input': TodoInputVue,
-    'todo-list': TodoListVue,
-    'todo-footer': TodoFooterVue
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter
   },
-  data: function() {
+  data() {
     return {
       todoItems: []
     }
   },
-  created: function() {
+  created() {
     if (localStorage.length > 0) {
-      for (var i=0; i < localStorage.length; i++) {
+      for (let i=0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+          const obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
           this.todoItems.push(obj);
         }
         // console.log(localStorage.getItem(localStorage.key));
@@ -41,24 +41,24 @@ export default {
     }
   },
   methods: {
-    addOneItem: function(newTodoItem) {
-      var obj = {
+    addOneItem(newTodoItem) {
+      const obj = {
         completed: false,
         item: newTodoItem
       }
       localStorage.setItem(newTodoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem: function(todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index, 1);
     },
-    toggleComplete: function(todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.todoItems[index].completed = !this.todoItems[index].completed;
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearTodo: function() {
+    clearTodo() {
       localStorage.clear();
       this.todoItems = [];
     }

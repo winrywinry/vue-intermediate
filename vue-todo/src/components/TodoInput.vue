@@ -10,13 +10,13 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
       newTodoItem: ""
     }
   },
   methods: {
-    addTodo: function() {
+    addTodo() {
       // console.log(this.newTodoItem);
       // Storage save
       // initialization
@@ -25,7 +25,7 @@ export default {
         this.clearInput();
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodoItem = '';
     }
   },
