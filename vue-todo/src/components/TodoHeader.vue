@@ -1,15 +1,15 @@
 <template>
   <header>
-    <h1>{{ headerText }}</h1>
+    <h1>{{ this.getHeaderText }}</h1>
   </header>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['headerText'])
+    ...mapGetters(['getHeaderText'])
   }
 }
 </script>
