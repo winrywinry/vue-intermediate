@@ -1,13 +1,9 @@
 <template>
   <div id="app">
     <todo-header></todo-header>
-    <todo-input v-on:addTodoItem="addOneItem"></todo-input>
-    <todo-list
-      v-bind:propsdata="todoItems"
-      v-on:removeTodoItem="removeOneItem"
-      v-on:emitToggleComplete="toggleComplete"
-    ></todo-list>
-    <todo-footer v-on:emitClearTodo="clearTodo"></todo-footer>
+    <todo-input></todo-input>
+    <todo-list></todo-list>
+    <todo-footer></todo-footer>
   </div>
 </template>
 
@@ -23,45 +19,6 @@ export default {
     TodoInput,
     TodoList,
     TodoFooter
-  },
-  data() {
-    return {
-      todoItems: []
-    }
-  },
-  created() {
-    if (localStorage.length > 0) {
-      for (let i=0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          const obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-          this.todoItems.push(obj);
-        }
-        // console.log(localStorage.getItem(localStorage.key));
-      }
-    }
-  },
-  methods: {
-    addOneItem(newTodoItem) {
-      const obj = {
-        completed: false,
-        item: newTodoItem
-      }
-      localStorage.setItem(newTodoItem, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
-    },
-    toggleComplete(todoItem, index) {
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearTodo() {
-      localStorage.clear();
-      this.todoItems = [];
-    }
   }
 }
 </script>
